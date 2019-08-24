@@ -1,0 +1,37 @@
+.yt-carousel {
+  display: flex;
+}
+
+.carousel-track-container {
+  position: relative;
+  padding: 5px;
+  margin: 0;
+}
+
+.carousel-track {
+  height: 500px;
+}
+
+.carousel-slide {
+  height: 500px;
+  position: absolute;
+  list-style: none;
+  padding: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+}
+
+.all-iframes  {
+  height: 181px;
+  width: 322px;
+}
+
+.current-iframe {
+  position: relative;
+  height: 225px;
+  width: 400px;
+  z-index: 20;
+  transform: translateX(-39px);
+}
