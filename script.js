@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
   var options = {
     part: 'snippet',
     key: key,
-    maxResults: 5,
+    maxResults: 15,
     playlistId: playlistId
   }
 
@@ -23,64 +23,81 @@ jQuery(document).ready(function() {
   }
 
 
-/*
-  function mainVid(id) {
-    jQuery('#video').html(`
-      <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/${id}"
-      frameborder="0" allow="accelerometer; autoplay;
-      encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-      `)
-  }
-  */
-
-
   function resultsLoop(data) {
 
     $.each(data.items, function(i, item) {
 
       var eachId = item.snippet.resourceId.videoId;
 
-      $('.carousel-track').append(`
-        <li class="carousel-slide"><iframe class="all-iframes"
+      jQuery('.carousel-track').append(`
+        <iframe class="carousel-iframes"
         src="https://www.youtube.com/embed/${eachId}"
         frameborder="0" allow="accelerometer; autoplay;
         encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe></li>
+        allowfullscreen></iframe>
         `);
 
     });
 
     var track = document.querySelector('.carousel-track');
-    var slides = Array.from(track.children);
+    var theIframes = Array.from(track.children).reverse();
     var prevButton = document.querySelector('.carousel-button-prev');
-    var nextButton = document.querySelector('.carousel-button-prev');
+    var nextButton = document.querySelector('.carousel-button-next');
 
-    var slideWidth = slides[0].getBoundingClientRect().width;
+    var iframeWidth = theIframes[0].getBoundingClientRect().width;
 
+    var numberOfIframes = theIframes.length;
 
     //Initial Slide Arrangement
-    /*slides[0].style.left = slideWidth * 0;
-    slides[1].style.left = slideWidth * 1 + 'px';
-    slides[2].style.left = slideWidth * 2 + 'px';
-    slides[3].style.left = slideWidth * 3 + 'px';
-    slides[4].style.left = slideWidth * 4 + 'px';*/
+    /*theIframes[0].style.left = slideWidth * 0;
+    theIframes[1].style.left = iframeWidth * 1 + 'px';
+    theIframes[2].style.left = iframeWidth * 2 + 'px';
+    theIframes[3].style.left = iframeWidth * 3 + 'px';
+    theIframes[4].style.left = iframeWidth * 4 + 'px';*/
 
-    var setSlidePosition = (slide, index) => {
-      slide.style.left = slideWidth * index + 'px';
+    var setIframePosition = (anIframe, index) => {
+      anIframe.style.left = iframeWidth * index + 'px';
     };
-    slides.forEach(setSlidePosition);
+    theIframes.forEach(setIframePosition);
 
+/*
+    //Choose where '.current-iframe' starts
 
-    //Choose where '.current-slide' starts
-    jQuery(slides[2].querySelector('iframe')).addClass('current-iframe');
+    var allIframes = document.getElementByClass('.carousel-iframes');
 
+    allIframes[2].className += 'current-iframe';
 
+    //jQuery('.carousel-iframes')[2].addClass('current-iframe');
+*/
 
+track.style.width = ((numberOfIframes * iframeWidth) + 10) + 'px';
+
+    //Click Next Equals Move to Left
     nextButton.addEventListener('click', e => {
-      var cerrentSlide = track.querySelector('.current-iframe')
+      var currentTrackPositionLeft = document.querySelector('.carousel-track').getBoundingClientRect().left;
+      var currentTrackPositionRight = document.querySelector('.carousel-track').getBoundingClientRect().right;
+      var currentTrackContainerWidth = document.querySelector('.carousel-track-container').getBoundingClientRect().width;
+
+      if (currentTrackPositionRight < currentTrackContainerWidth + 5 || currentTrackPositionRight == currentTrackContainerWidth + 5) {
+      track.style.right = currentTrackPositionLeft + 'px)';
+    }else {
+      track.style.transform = 'translateX(calc(' + currentTrackPositionLeft + 'px - 350px))';
+    }
+      });
+
+    //Click Next Equals Move to Left
+    prevButton.addEventListener('click', e => {
+      var currentTrackPositionLeft = document.querySelector('.carousel-track').getBoundingClientRect().left;
+
+      if (currentTrackPositionLeft > 5 || currentTrackPositionLeft == 5) {
+      track.style.left = currentTrackPositionLeft + 'px)';
+    }else {
+      track.style.transform = 'translateX(calc(' + currentTrackPositionLeft + 'px + 340px))';
+    }
     });
+
+
+      //(numberOfIframes * 350)
 
   }
 

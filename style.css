@@ -1,21 +1,37 @@
 .yt-carousel {
-  display: flex;
+  background-color: orangered;
+  position: relative;
+  overflow: hidden;
+  width: 1250px;
+}
+
+.carousel-button-prev {
+
+}
+
+.carousel-button-next {
+
 }
 
 .carousel-track-container {
   position: relative;
   padding: 5px;
+  background-color: yellow;
   margin: 0;
+  width: 100%;
 }
 
 .carousel-track {
-  height: 500px;
+  height: 600px;
+  position: relative;
+  transition: transform 250ms;
+  background-color: blue;
 }
 
-.carousel-slide {
-  height: 500px;
+.carousel-iframes {
+  height: 200px;
+  width: 345px;
   position: absolute;
-  list-style: none;
   padding: 5px;
   margin-top: auto;
   margin-bottom: auto;
@@ -23,11 +39,9 @@
   bottom: 0;
 }
 
-.all-iframes  {
-  height: 181px;
-  width: 322px;
-}
 
+
+/*
 .current-iframe {
   position: relative;
   height: 225px;
@@ -35,3 +49,4 @@
   z-index: 20;
   transform: translateX(-39px);
 }
+*/
