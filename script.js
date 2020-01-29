@@ -1,8 +1,8 @@
 //YouTube API App Carousel
 jQuery(document).ready(function() {
 
-  var key = '';
-  var playlistId = '';
+  var key = 'AIzaSyCipJMqEaZvCAQycCJHb8Y5tti3h8Z56PQ';
+  var playlistId = 'PLillGF-RfqbbnEGy3ROiLWk7JMCuSyQtX';
   var url = 'https://www.googleapis.com/youtube/v3/playlistItems';
 
   var options = {
